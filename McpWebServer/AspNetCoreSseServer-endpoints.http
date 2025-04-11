@@ -1,0 +1,33 @@
+###
+POST http://localhost:3001/message
+Content-Type: application/json
+
+{
+  "jsonrpc": "2.0",
+  "id": "1",
+  "method": "sampleLLM",
+  "params": {
+    "prompt": "Tell me a short joke",
+    "maxTokens": 100
+  }
+}
+
+###
+POST http://localhost:3001/message
+Content-Type: application/json
+
+{
+  "method": "tools/call",
+  "params": {
+    "name": "echo",
+    "arguments": {
+      "message": "world"
+    }
+  },
+  "jsonrpc": "2.0",
+  "id": 1
+}
+
+###
+GET http://localhost:3001/sse
+Content-Type: application/json
