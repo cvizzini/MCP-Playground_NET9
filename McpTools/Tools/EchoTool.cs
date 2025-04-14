@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.Design;
 using ModelContextProtocol.Server;
 
 namespace McpTools.Tools;
 
-[McpToolType]
+[McpServerToolType]
 public static class EchoTool
 {
-    [McpTool("echo"), Description("Echoes the message back to the client.")]
+    [McpServerTool(Destructive = false, Idempotent = true, Name= "echo", OpenWorld = false), 
+     Description("Echoes the message back to the client.")]
     public static string Echo(string message) => $"hello {message}";
 }

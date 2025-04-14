@@ -1,19 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Net.Http;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Nodes;
-using System.Text.Json.Serialization;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace McpClientApp
 {
     static class Program
     {
-        private static readonly HttpClient _httpClient = new HttpClient();
+        private static readonly HttpClient HttpClient = new HttpClient();
         private const string BaseUrl = "http://localhost:3001";
 
         static async Task Main(string[] args)
@@ -82,7 +75,7 @@ namespace McpClientApp
             Console.WriteLine("Connecting to SSE endpoint...");
             
             using var request = new HttpRequestMessage(HttpMethod.Get, $"{BaseUrl}/sse");
-            using var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+            using var response = await HttpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
             response.EnsureSuccessStatusCode();
             
             using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
@@ -171,7 +164,7 @@ namespace McpClientApp
                 }
             };
             
-            var response = await _httpClient.PostAsJsonAsync($"{BaseUrl}/message", request, cancellationToken);
+            var response = await HttpClient.PostAsJsonAsync($"{BaseUrl}/message", request, cancellationToken);
             response.EnsureSuccessStatusCode();
             
             Console.WriteLine("LLM request sent successfully. Waiting for response...");
@@ -194,7 +187,7 @@ namespace McpClientApp
                 }
             };
             
-            var response = await _httpClient.PostAsJsonAsync($"{BaseUrl}/message", request, cancellationToken);
+            var response = await HttpClient.PostAsJsonAsync($"{BaseUrl}/message", request, cancellationToken);
             response.EnsureSuccessStatusCode();
             
             Console.WriteLine("Echo tool request sent successfully. Waiting for response...");

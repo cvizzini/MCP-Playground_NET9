@@ -1,7 +1,6 @@
 using System.Reflection;
-using AspNetCoreSseServer;
 using McpTools.Tools;
-using ModelContextProtocol;
+using Microsoft.AspNetCore.Builder.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMcpServer()
@@ -10,7 +9,8 @@ builder.Services.AddMcpServer()
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
-app.MapMcpSse();
+// app.MapMcpSse();
+app.MapMcp();
 
 app.Run();
 

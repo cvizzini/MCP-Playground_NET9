@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using McpTools.Tools;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ModelContextProtocol;
 

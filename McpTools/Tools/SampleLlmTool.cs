@@ -7,10 +7,11 @@ namespace McpTools.Tools;
 /// <summary>
 /// This tool uses dependency injection and async method
 /// </summary>
-[McpToolType]
+[McpServerToolType]
 public static class SampleLlmTool
 {
-    [McpTool("sampleLLM"), Description("Samples from an LLM using MCP's sampling feature")]
+    [McpServerTool( Destructive = false, Idempotent = true, Name= "sampleLLM", OpenWorld = false),
+     Description("Samples from an LLM using MCP's sampling feature")]
     public static async Task<string> SampleLLM(
         IMcpServer thisServer,
         [Description("The prompt to send to the LLM")] string prompt,
